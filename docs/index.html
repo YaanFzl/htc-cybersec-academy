@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛡️ HTC CyberSec Academy - Live Challenges</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+        }
+        .header {
+            margin-bottom: 3rem;
+        }
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .title {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .description {
+            color: #888;
+            font-style: italic;
+        }
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .challenge-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border: 2px solid #dee2e6;
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        .challenge-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-color: #667eea;
+        }
+        .challenge-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .challenge-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        .challenge-desc {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .challenge-difficulty {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .difficulty-easy {
+            background: #d4edda;
+            color: #155724;
+        }
+        .difficulty-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .challenge-points {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .portal-link {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-block;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+        }
+        .portal-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+        .warning {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 2rem 0;
+            color: #721c24;
+        }
+        .footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #eee;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🛡️</div>
+            <div class="title">HTC CyberSec Academy</div>
+            <div class="subtitle">Live Web Security Challenges</div>
+            <div class="description">Platform Challenge Cybersecurity Indonesia</div>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Ethical Hacking Only!</strong><br>
+            Challenge ini dibuat untuk tujuan edukasi. Gunakan pengetahuan ini secara bertanggung jawab dan etis.
+        </div>
+
+        <div class="challenges-grid">
+            <a href="challenges/htc-web-001/index_id.html" class="challenge-card">
+                <div class="challenge-icon">🌐</div>
+                <div class="challenge-title">HTC-WEB-001: Portal Login Vulnerable</div>
+                <div class="challenge-desc">
+                    Bypass login portal perusahaan menggunakan SQL injection. 
+                    Temukan cara masuk tanpa kredensial yang valid!
+                </div>
+                <div class="challenge-difficulty difficulty-easy">MUDAH</div>
+                <div class="challenge-points">🏆 150 Points</div>
+            </a>
+
+            <a href="challenges/htc-web-002/index_id.html" class="challenge-card">
+                <div class="challenge-icon">💬</div>
+                <div class="challenge-title">HTC-WEB-002: Forum XSS Challenge</div>
+                <div class="challenge-desc">
+                    Eksploitasi kerentanan Cross-Site Scripting (XSS) pada sistem komentar forum. 
+                    Injeksi script untuk mendapatkan flag!
+                </div>
+                <div class="challenge-difficulty difficulty-medium">MEDIUM</div>
+                <div class="challenge-points">🏆 250 Points</div>
+            </a>
+        </div>
+
+        <a href="https://htc-cybersec-academy.streamlit.app" class="portal-link">
+            🚀 Buka Portal Utama untuk Submit Flag
+        </a>
+
+        <div class="footer">
+            <strong>🇮🇩 Mari bersama membangun Indonesia yang lebih aman di era digital!</strong><br><br>
+            
+            <strong>📚 Cara Menggunakan:</strong><br>
+            1. Pilih challenge yang ingin dikerjakan<br>
+            2. Analisis dan temukan kerentanan<br>
+            3. Dapatkan flag dari hasil eksploitasi<br>
+            4. Submit flag di portal utama untuk mendapat poin<br><br>
+            
+            <strong>🎯 Format Flag:</strong> <code>HTC{...}</code><br><br>
+            
+            <em>HTC Instructor Team - Developed with ❤️ for Indonesian cybersecurity education</em>
+        </div>
+    </div>
+</body>
+</html>

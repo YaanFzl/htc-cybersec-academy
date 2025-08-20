@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum Diskusi HTC - Sistem Komentar</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        .forum-post {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-left: 5px solid #667eea;
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        
+        .post-info h3 {
+            margin: 0 0 0.5rem 0;
+            color: #333;
+        }
+        
+        .post-info .date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .post-content {
+            line-height: 1.6;
+            color: #444;
+        }
+        
+        .comments-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .comments-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .comment {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .comment:hover {
+            border-left-color: #667eea;
+            transform: translateX(5px);
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .comment-author {
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .comment-date {
+            font-size: 0.8rem;
+            color: #999;
+        }
+        
+        .comment-content {
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .comment-form {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            border: 2px dashed #dee2e6;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .challenge-info {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 2px solid #f6e05e;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        
+        .challenge-title {
+            font-weight: bold;
+            color: #744210;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hint-box {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-left: 4px solid #2196f3;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+        
+        .success-message {
+            background: linear-gradient(135deg, #c6f6d5, #9ae6b4);
+            color: #2d5016;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #38a169;
+            margin: 1rem 0;
+            display: none;
+        }
+        
+        .error-message {
+            background: linear-gradient(135deg, #fed7d7, #feb2b2);
+            color: #742a2a;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #e53e3e;
+            margin: 1rem 0;
+            display: none;
+        }
+        
+        .vulnerable-content {
+            /* Styling for content that will be vulnerable to XSS */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 Forum Diskusi HTC</h1>
+            <p>Platform Diskusi Mahasiswa Teknik Informatika</p>
+            <p><em>Berbagi Ilmu, Membangun Masa Depan</em></p>
+        </div>
+
+        <div class="challenge-info">
+            <div class="challenge-title">🎯 HTC-WEB-002: The Comment Section Nightmare (MEDIUM)</div>
+            <p><strong>Skenario:</strong> Mahasiswa HTC melaporkan adanya pop-up aneh dan perilaku mencurigakan di sistem komentar forum ini. Tim IT menduga ada yang melakukan XSS (Cross-Site Scripting) injection. Tugas Anda: temukan dan eksploitasi kerentanan XSS ini!</p>
+            
+            <p><strong>🎯 Tujuan:</strong> Berhasil mengeksekusi JavaScript melalui sistem komentar</p>
+            <p><strong>🚩 Format Flag:</strong> HTC{xss_master_htc_2024}</p>
+            
+            <div class="hint-box">
+                <strong>💡 Petunjuk:</strong>
+                <ul>
+                    <li>Perhatikan bagaimana input diproses dalam sistem komentar</li>
+                    <li>Coba berbagai tag HTML dan JavaScript</li>
+                    <li>XSS bisa terjadi di nama atau konten komentar</li>
+                    <li>Jika berhasil, alert atau pop-up akan muncul</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Forum Post -->
+        <div class="forum-post">
+            <div class="post-header">
+                <div class="avatar">DR</div>
+                <div class="post-info">
+                    <h3>Diskusi: Keamanan Sistem Informasi dalam Era Digital</h3>
+                    <div class="date">Posted by Dr. Rahman - 15 November 2024</div>
+                </div>
+            </div>
+            <div class="post-content">
+                <p>Selamat datang di forum diskusi mata kuliah Keamanan Sistem Informasi. Dalam era digital yang semakin maju, pemahaman tentang cybersecurity menjadi sangat penting bagi mahasiswa Teknik Informatika.</p>
+                
+                <p>Mari kita diskusikan berbagai aspek keamanan siber, mulai dari:</p>
+                <ul>
+                    <li>Web Application Security</li>
+                    <li>Network Security</li>
+                    <li>Cryptography</li>
+                    <li>Digital Forensics</li>
+                </ul>
+                
+                <p>Silakan share pengalaman, pertanyaan, atau insight kalian di kolom komentar di bawah!</p>
+            </div>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="comments-section">
+            <div class="comments-header">
+                <h2>💬 Komentar Diskusi</h2>
+            </div>
+
+            <!-- Existing Comments -->
+            <div class="comment">
+                <div class="comment-header">
+                    <span class="comment-author">Andi Pratama</span>
+                    <span class="comment-date">16 Nov 2024, 08:30</span>
+                </div>
+                <div class="comment-content">
+                    Terima kasih Dr. Rahman! Saya tertarik dengan topik Web Application Security. Apakah akan ada praktikum hands-on untuk SQL injection dan XSS?
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-header">
+                    <span class="comment-author">Siti Nurhaliza</span>
+                    <span class="comment-date">16 Nov 2024, 10:15</span>
+                </div>
+                <div class="comment-content">
+                    Setuju dengan Andi! Mungkin bisa juga dibahas tentang social engineering dan phishing. Akhir-akhir ini banyak kasus penipuan online yang menargetkan mahasiswa.
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="comment-header">
+                    <span class="comment-author">Budi Santoso</span>
+                    <span class="comment-date">16 Nov 2024, 14:20</span>
+                </div>
+                <div class="comment-content">
+                    Saya pernah mengalami website yang ter-hack karena kerentanan XSS. Ternyata input form tidak divalidasi dengan baik. Pembelajaran yang berharga!
+                </div>
+            </div>
+
+            <!-- Dynamic Comments Area -->
+            <div id="dynamicComments"></div>
+
+            <!-- Comment Form -->
+            <div class="comment-form">
+                <h3>✍️ Tambah Komentar</h3>
+                <form id="commentForm">
+                    <div class="form-group">
+                        <label for="authorName">Nama Anda:</label>
+                        <input type="text" id="authorName" class="form-control" placeholder="Masukkan nama Anda" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="commentText">Komentar:</label>
+                        <textarea id="commentText" class="form-control" placeholder="Tulis komentar atau pertanyaan Anda di sini..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">📝 Kirim Komentar</button>
+                </form>
+            </div>
+
+            <div id="statusMessage"></div>
+        </div>
+
+        <div class="footer">
+            🎓 HTC CyberSec Academy - Challenge HTC-WEB-002<br>
+            🛡️ Praktikkan Ethical Hacking dengan Bertanggung Jawab!<br>
+            <small>Sistem ini sengaja dibuat vulnerable untuk tujuan edukasi</small>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('commentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const authorName = document.getElementById('authorName').value;
+            const commentText = document.getElementById('commentText').value;
+            const statusDiv = document.getElementById('statusMessage');
+            const dynamicComments = document.getElementById('dynamicComments');
+            
+            // Clear previous status
+            statusDiv.innerHTML = '';
+            statusDiv.className = '';
+            
+            // Simulate XSS vulnerability - NO INPUT SANITIZATION!
+            // In a real application, this would be dangerous
+            const currentDate = new Date().toLocaleString('id-ID');
+            
+            // VULNERABLE: Direct innerHTML insertion without sanitization
+            const commentHTML = `
+                <div class="comment">
+                    <div class="comment-header">
+                        <span class="comment-author">${authorName}</span>
+                        <span class="comment-date">${currentDate}</span>
+                    </div>
+                    <div class="comment-content vulnerable-content">
+                        ${commentText}
+                    </div>
+                </div>
+            `;
+            
+            // Insert the comment (vulnerable to XSS)
+            dynamicComments.innerHTML = commentHTML + dynamicComments.innerHTML;
+            
+            // Check if XSS was successful
+            const xssPatterns = [
+                '<script',
+                'javascript:',
+                'onload=',
+                'onerror=',
+                'onclick=',
+                'onmouseover=',
+                'alert(',
+                'confirm(',
+                'prompt('
+            ];
+            
+            const inputContent = (authorName + commentText).toLowerCase();
+            let xssDetected = false;
+            
+            for (let pattern of xssPatterns) {
+                if (inputContent.includes(pattern.toLowerCase())) {
+                    xssDetected = true;
+                    break;
+                }
+            }
+            
+            // Success message for XSS attempts
+            if (xssDetected) {
+                setTimeout(() => {
+                    statusDiv.innerHTML = `
+                        <div class="success-message" style="display: block;">
+                            🎉 <strong>XSS Challenge Berhasil!</strong><br>
+                            Selamat! Anda telah berhasil menemukan dan mengeksploitasi kerentanan XSS di sistem komentar ini.<br><br>
+                            
+                            <strong>🚩 FLAG:</strong> <span style="background: #ffffcc; padding: 4px 8px; border-radius: 4px; font-family: monospace; font-weight: bold;">HTC{xss_master_htc_2024}</span><br><br>
+                            
+                            <strong>🎓 Yang Anda Pelajari:</strong><br>
+                            • XSS terjadi ketika input pengguna tidak disanitasi<br>
+                            • JavaScript dapat dieksekusi melalui berbagai cara<br>
+                            • Dampak XSS bisa sangat berbahaya (cookie theft, session hijacking)<br>
+                            • Validasi input dan output encoding sangat penting<br><br>
+                            
+                            <strong>🛡️ Cara Mencegah:</strong><br>
+                            • Sanitasi semua input pengguna<br>
+                            • Gunakan output encoding (htmlspecialchars, dll)<br>
+                            • Content Security Policy (CSP)<br>
+                            • Input validation yang ketat<br><br>
+                            
+                            <strong>⚠️ Ethical Note:</strong> Gunakan pengetahuan ini untuk melindungi sistem, bukan untuk merugikan!
+                        </div>
+                    `;
+                    
+                    // Special effects for successful XSS
+                    document.body.style.animation = 'none';
+                    setTimeout(() => {
+                        document.body.style.animation = 'pulse 2s';
+                    }, 100);
+                }, 1000);
+            } else {
+                statusDiv.innerHTML = `
+                    <div class="success-message" style="display: block;">
+                        ✅ <strong>Komentar Berhasil Ditambahkan!</strong><br>
+                        Terima kasih atas partisipasi Anda dalam diskusi forum HTC.<br><br>
+                        <em>💡 Hint: Untuk menyelesaikan challenge, coba eksplorasi kemungkinan XSS injection...</em>
+                    </div>
+                `;
+            }
+            
+            // Clear form
+            document.getElementById('commentForm').reset();
+            
+            // Scroll to show new comment
+            setTimeout(() => {
+                dynamicComments.scrollIntoView({ behavior: 'smooth' });
+            }, 500);
+        });
+        
+        // Add some CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { background-color: rgba(102, 126, 234, 0.1); }
+                50% { background-color: rgba(102, 126, 234, 0.2); }
+                100% { background-color: rgba(102, 126, 234, 0.1); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Easter egg for motivation
+        let clickCount = 0;
+        document.querySelector('.header h1').addEventListener('click', function() {
+            clickCount++;
+            if (clickCount === 5) {
+                alert('🎉 Semangat belajar XSS! Remember: Use your powers for good, not evil! 🛡️');
+            }
+        });
+        
+        // Warning on page load
+        setTimeout(() => {
+            console.log('%c🛡️ HTC CyberSec Academy - XSS Challenge', 'color: #667eea; font-size: 16px; font-weight: bold;');
+            console.log('%cChallenge: Find and exploit XSS vulnerability in comment system', 'color: #666; font-size: 12px;');
+            console.log('%cTip: Try injecting JavaScript through input fields', 'color: #888; font-size: 10px;');
+        }, 1000);
+    </script>
+</body>
+</html>

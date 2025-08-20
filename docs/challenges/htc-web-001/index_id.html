@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko Online HTC - Login Admin</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 420px;
+            border: 1px solid rgba(255,255,255,0.18);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .logo {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+        .company-info {
+            font-size: 0.8rem;
+            color: #999;
+            font-style: italic;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.6rem;
+            color: #333;
+            font-weight: 600;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+        .error {
+            color: #e53e3e;
+            background: linear-gradient(135deg, #fed7d7, #feb2b2);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+            border-left: 4px solid #e53e3e;
+        }
+        .success {
+            color: #38a169;
+            background: linear-gradient(135deg, #c6f6d5, #9ae6b4);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+            border-left: 4px solid #38a169;
+        }
+        .hint-box {
+            background: linear-gradient(135deg, #fffbeb, #fef5e7);
+            border: 2px solid #f6e05e;
+            padding: 1.2rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(246, 224, 94, 0.2);
+        }
+        .hint-title {
+            font-weight: bold;
+            color: #744210;
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .hint-content {
+            line-height: 1.6;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #666;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        .flag-format {
+            background: #f0f0f0;
+            padding: 0.5rem;
+            border-radius: 5px;
+            font-family: monospace;
+            margin-top: 0.5rem;
+        }
+        .objective {
+            background: #e3f2fd;
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin: 0.8rem 0;
+            border-left: 4px solid #2196f3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🛒 Toko Online HTC</div>
+            <div class="subtitle">Portal Administrator</div>
+            <div class="company-info">PT. HTC Digital Commerce Indonesia</div>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Nama Pengguna:</label>
+                <input type="text" id="username" name="username" placeholder="Masukkan nama pengguna Anda">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Kata Sandi:</label>
+                <input type="password" id="password" name="password" placeholder="Masukkan kata sandi Anda">
+            </div>
+            
+            <button type="submit" class="login-btn">🔐 Masuk</button>
+        </form>
+
+        <div id="errorMessage" class="error"></div>
+        <div id="successMessage" class="success"></div>
+
+        <div class="hint-box">
+            <div class="hint-title">🎯 Hint Challenge HTC:</div>
+            <div class="hint-content">
+                Apa yang terjadi ketika input pengguna tidak disanitasi dengan benar? Coba pikirkan bagaimana backend mungkin membangun query database. Kadang-kadang payload paling sederhana adalah yang paling efektif!
+                
+                <div class="objective">
+                    <strong>🎯 Tujuan:</strong> Bypass login tanpa mengetahui kredensial yang valid.
+                </div>
+                
+                <div class="flag-format">
+                    <strong>🚩 Format Flag:</strong> HTC{pesan_login_berhasil}
+                </div>
+                
+                <strong>💡 Petunjuk Tambahan:</strong>
+                <ul style="margin-top: 0.5rem; padding-left: 1.2rem;">
+                    <li>Pikirkan tentang SQL injection</li>
+                    <li>Coba karakter khusus seperti tanda petik (' )</li>
+                    <li>Perhatikan bagaimana query SQL dibentuk</li>
+                    <li>Ingat: OR logic bisa sangat berguna!</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            🎓 Akademi CyberSec HTC - Challenge HTC-WEB-001<br>
+            🛡️ Praktikkan Ethical Hacking Saja!<br>
+            <small>Dibuat untuk tujuan edukasi cybersecurity</small>
+        </div>
+    </div>
+
+    <script>
+        // Simulasi sistem login yang vulnerable untuk tujuan edukasi
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            
+            // Sembunyikan pesan sebelumnya
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            // Simulasi kerentanan SQL injection
+            // Di aplikasi nyata, ini akan berada di sisi server
+            const sqlQuery = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
+            
+            // Cek pola SQL injection umum
+            const polaSqlInjection = [
+                "' OR '1'='1",
+                "' OR 1=1--",
+                "admin'--",
+                "' OR 'x'='x",
+                "'; DROP TABLE",
+                "' UNION SELECT",
+                "admin' OR '1'='1'--",
+                "' OR TRUE--",
+                "1' OR '1'='1",
+                "admin'/*"
+            ];
+            
+            let isInjection = false;
+            let usedPayload = "";
+            
+            for (let pattern of polaSqlInjection) {
+                if (username.includes(pattern) || password.includes(pattern)) {
+                    isInjection = true;
+                    usedPayload = pattern;
+                    break;
+                }
+            }
+            
+            // Simulasi respons berbeda
+            if (isInjection) {
+                successDiv.innerHTML = `
+                    🎉 <strong>Login Berhasil!</strong><br>
+                    Selamat datang Administrator!<br><br>
+                    
+                    <strong>🚩 FLAG:</strong> <span style="background: #ffffcc; padding: 2px 6px; border-radius: 3px; font-family: monospace;">HTC{sql_injection_master_indonesia_2024}</span><br><br>
+                    
+                    <strong>🎓 Apa yang Anda pelajari:</strong><br>
+                    • SQL injection dapat mem-bypass otentikasi<br>
+                    • Input pengguna harus selalu disanitasi<br>
+                    • Gunakan parameterized query untuk mencegah ini<br>
+                    • Prinsip "never trust user input" sangat penting<br><br>
+                    
+                    <strong>💻 Query yang dieksekusi:</strong><br>
+                    <code style="font-size:0.8em; background: #f5f5f5; padding: 8px; border-radius: 4px; display: block; margin-top: 4px;">${sqlQuery}</code><br>
+                    
+                    <strong>🔍 Payload yang digunakan:</strong> <code>${usedPayload}</code><br><br>
+                    
+                    <strong>🛡️ Cara mencegah:</strong><br>
+                    • Gunakan prepared statements<br>
+                    • Validasi input yang ketat<br>
+                    • Implementasi WAF (Web Application Firewall)<br>
+                    • Regular security testing
+                `;
+                successDiv.style.display = 'block';
+            } else if (username === 'admin' && password === 'password123') {
+                // Kredensial valid (untuk demonstrasi)
+                successDiv.innerHTML = `
+                    🎉 <strong>Login Berhasil!</strong><br>
+                    Selamat datang Administrator!<br><br>
+                    
+                    <strong>🚩 FLAG:</strong> <span style="background: #ffffcc; padding: 2px 6px; border-radius: 3px; font-family: monospace;">HTC{legitimate_login_indonesia_2024}</span><br><br>
+                    
+                    <em>Tapi menemukan SQL injection adalah challenge yang sebenarnya!</em><br>
+                    💡 Coba lagi dengan teknik SQL injection untuk mendapat flag utama!
+                `;
+                successDiv.style.display = 'block';
+            } else {
+                // Cek apakah ada attempt injection tapi belum tepat
+                if (username.includes("'") || password.includes("'")) {
+                    errorDiv.innerHTML = `
+                        ❌ <strong>Login Gagal</strong><br>
+                        Nama pengguna atau kata sandi tidak valid.<br><br>
+                        
+                        🤔 <em>Sepertinya Anda sudah di jalur yang benar dengan karakter khusus...</em><br>
+                        💡 <strong>Hint:</strong> Coba pikirkan bagaimana membuat kondisi yang selalu TRUE dalam SQL!<br>
+                        🔍 Contoh: Bagaimana jika query menjadi <code>WHERE username = 'admin' OR '1'='1'</code>?
+                    `;
+                } else {
+                    errorDiv.innerHTML = `
+                        ❌ <strong>Login Gagal</strong><br>
+                        Nama pengguna atau kata sandi tidak valid.<br><br>
+                        
+                        💡 <em>Hint: Mungkin coba kombinasi input yang kreatif...</em><br>
+                        🔍 <strong>Petunjuk:</strong> Pikirkan tentang SQL injection dan karakter khusus!
+                    `;
+                }
+                errorDiv.style.display = 'block';
+            }
+        });
+        
+        // Easter egg untuk motivasi
+        let clickCount = 0;
+        document.querySelector('.logo').addEventListener('click', function() {
+            clickCount++;
+            if (clickCount === 5) {
+                alert('🎉 Semangat belajar cybersecurity! Kalian adalah masa depan keamanan siber Indonesia! 🇮🇩');
+            }
+        });
+    </script>
+</body>
+</html>
