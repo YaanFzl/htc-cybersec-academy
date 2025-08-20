@@ -1,0 +1,30 @@
+{
+  "students": {
+    "2311016210031": {
+      "nama": "Ahmad Ryan Faizal",
+      "email": "2311016210031@mhs.ulm.ac.id",
+      "total_points": 140,
+      "challenges_completed": [
+        "HTC-WEB-001"
+      ],
+      "badges": [
+        "first_blood",
+        "web_novice"
+      ],
+      "hints_used": {
+        "HTC-WEB-001": 1
+      },
+      "join_date": "2025-08-19T23:55:59.259489",
+      "last_activity": "2025-08-19T23:56:41.252343"
+    }
+  },
+  "submissions": [
+    {
+      "nim": "2311016210031",
+      "challenge_id": "HTC-WEB-001",
+      "points_earned": 140,
+      "hints_used": 1,
+      "timestamp": "2025-08-19T23:56:41.252355"
+    }
+  ]
+}

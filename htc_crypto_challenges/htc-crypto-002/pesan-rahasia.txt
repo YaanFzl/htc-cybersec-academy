@@ -1,0 +1,176 @@
+===============================================
+🔐 HTC-CRYPTO-002: Tugas Teracak (MEDIUM)
+===============================================
+
+Skenario:
+Seorang mahasiswa HTC mengirim tugas akhir melalui email, tapi isinya 
+tampak seperti kacau balau! Portal submission menunjukkan string aneh 
+yang tidak dapat dibaca. Dosen curiga ini bukan file rusak, tapi 
+ter-encode dengan multiple layers encoding.
+
+Tim IT menemukan bahwa mahasiswa tersebut sengaja meng-encode tugasnya 
+untuk alasan keamanan, tapi lupa memberitahu metode encoding yang 
+digunakan. Bisakah Anda membantu decode tugas ini?
+
+Pesan Ter-encode:
+"VjJWc2FXeGhibWYwSUhCaFoybGNiV0ZvWVhOcGMzZGhJRWhVUXlGY1pHeGhaeUJCYm1SaElHRmtZV3hoYURwY1NGUkRlMkpoYzJVMk5GOWtaV052WkdWeVgybHVaRzl1WlhOcFlWOHlNREkwZlE9PQ=="
+
+Petunjuk:
+- Ini menggunakan kombinasi multiple encoding techniques
+- Salah satunya adalah Base64 encoding (terlihat dari padding '=' di akhir)
+- Mungkin ada cipher klasik yang digunakan juga
+- Decode secara bertahap, step by step
+- Hasil akhir akan berupa kalimat Bahasa Indonesia yang bermakna
+
+Tujuan:
+Decode pesan dan dapatkan flag HTC!
+
+Format Flag: HTC{...}
+
+===============================================
+💡 Hint Bertahap:
+
+Hint 1 (Gratis):
+"Dua layer encoding digunakan. Mulai dari yang paling obvious - 
+apa yang terlihat dari padding '=' di akhir string?"
+
+Hint 2 (-10 poin):
+"Setelah Base64 decode, Anda akan mendapat string yang masih ter-encode. 
+Coba lihat karakternya - mungkin ada pattern shifting?"
+
+Hint 3 (-20 poin):  
+"Layer kedua menggunakan ROT13 cipher. ROT13 adalah Caesar cipher 
+dengan shift 13 posisi."
+
+Hint 4 (-30 poin):
+"Langkah-langkah: 
+1. Base64 decode string awal
+2. ROT13 decode hasil step 1
+3. Flag akan muncul dalam format HTC{...}"
+
+===============================================
+🛠️ Tools yang bisa digunakan:
+
+1. Online Base64 Decoder:
+   - https://www.base64decode.org/
+   - Command line: echo "string" | base64 -d
+
+2. ROT13 Decoder:
+   - https://rot13.com/
+   - Command line: echo "string" | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+
+3. CyberChef (Multi-tool):
+   - https://gchq.github.io/CyberChef/
+   - Pilih Base64 -> ROT13
+
+4. Terminal Linux:
+   ```bash
+   # Step 1: Base64 decode
+   echo "VjJWc2FXeGhibWYw..." | base64 -d
+   
+   # Step 2: ROT13 decode hasil step 1
+   echo "hasil_step1" | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+   ```
+
+===============================================
+🎓 Learning Objectives:
+
+- Memahami multiple layer encoding/encryption
+- Menguasai Base64 encoding/decoding
+- Mempelajari ROT13 cipher
+- Berlatih pattern recognition dalam cryptanalysis
+- Menggunakan command line tools untuk cryptography
+- Memahami pentingnya layer security dalam data protection
+
+===============================================
+🔬 Advanced Analysis (Opsional):
+
+Untuk mahasiswa yang ingin eksplorasi lebih dalam:
+
+1. Frequency Analysis:
+   - Analisis distribusi karakter dalam setiap layer
+   - Bandingkan dengan distribusi normal bahasa Indonesia
+
+2. Entropy Analysis:
+   - Hitung entropy informasi setiap layer encoding
+   - Lihat bagaimana entropy berubah setelah decoding
+
+3. Pattern Recognition:
+   - Identifikasi signature dari different encoding methods
+   - Belajar mengenali Base64, ROT13, dan cipher lainnya
+
+4. Automated Detection:
+   - Buat script yang bisa auto-detect encoding type
+   - Implement multi-layer decoder algorithm
+
+===============================================
+🛡️ Real-world Applications:
+
+Teknik multiple layer encoding ini sering digunakan dalam:
+
+1. **Malware Analysis**: 
+   - Malware sering menggunakan multiple encoding layers
+   - Reverse engineer harus decode step by step
+
+2. **Data Obfuscation**:
+   - Protect sensitive data dalam transmission
+   - Add complexity untuk security through obscurity
+
+3. **CTF Competitions**:
+   - Common technique dalam cybersecurity competitions
+   - Test participant's cryptanalysis skills
+
+4. **Forensic Investigation**:
+   - Criminals often use multiple encoding untuk hide evidence
+   - Digital forensic experts perlu master decoding techniques
+
+===============================================
+🎯 Success Criteria:
+
+✅ Berhasil identify Base64 encoding dari padding
+✅ Successfully decode Base64 layer  
+✅ Recognize ROT13 pattern dalam decoded text
+✅ Apply ROT13 decoding correctly
+✅ Extract final flag dalam format HTC{...}
+✅ Understand the complete encoding process
+
+Bonus Points:
+🌟 +25 poin: Selesai tanpa menggunakan hint
+🌟 +15 poin: Gunakan command line tools saja
+🌟 +10 poin: Explain encoding process secara detail
+🌟 +5 poin: Identify alternatif decoding methods
+
+===============================================
+📝 Write-up Template:
+
+Setelah menyelesaikan challenge, tuliskan laporan:
+
+## Executive Summary
+"Challenge ini menggunakan two-layer encoding..."
+
+## Analysis Process
+```
+Step 1: Visual inspection - identified Base64 padding
+Step 2: Base64 decoding using [tool/command]
+Step 3: Pattern analysis of decoded result
+Step 4: ROT13 decoding application
+Step 5: Flag extraction and validation
+```
+
+## Technical Details
+"Base64 encoding digunakan sebagai outer layer..."
+"ROT13 cipher applied sebagai inner protection..."
+
+## Tools and Commands Used
+```bash
+echo "VjJWc2FXeGhibWYw..." | base64 -d
+echo "decoded_result" | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+```
+
+## Lessons Learned
+"Dari challenge ini saya belajar tentang..."
+
+## Recommendations
+"Untuk prevent this type of attack..."
+
+===============================================

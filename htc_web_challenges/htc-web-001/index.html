@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTC E-Commerce Corp - Admin Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .login-btn:hover {
+            background: #5a67d8;
+        }
+        .error {
+            color: #e53e3e;
+            background: #fed7d7;
+            padding: 0.75rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            display: none;
+        }
+        .success {
+            color: #38a169;
+            background: #c6f6d5;
+            padding: 0.75rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            display: none;
+        }
+        .hint-box {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+        .hint-title {
+            font-weight: bold;
+            color: #744210;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🏢 HTC E-Commerce Corp</div>
+            <div class="subtitle">Administrator Login Portal</div>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password">
+            </div>
+            
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <div id="errorMessage" class="error"></div>
+        <div id="successMessage" class="success"></div>
+
+        <div class="hint-box">
+            <div class="hint-title">🎯 HTC Challenge Hint:</div>
+            What happens when user input isn't properly sanitized? Try thinking about how the backend might be constructing database queries. Sometimes the simplest payloads are the most effective!
+            <br><br>
+            <strong>Objective:</strong> Bypass the login without knowing valid credentials.
+            <br>
+            <strong>Flag Format:</strong> HTC{successful_login_message}
+        </div>
+
+        <div class="footer">
+            HTC CyberSec Academy - Challenge HTC-WEB-001<br>
+            🛡️ Practice Ethical Hacking Only!
+        </div>
+    </div>
+
+    <script>
+        // Simulate a vulnerable login system for educational purposes
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('errorMessage');
+            const successDiv = document.getElementById('successMessage');
+            
+            // Hide previous messages
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            // Simulate SQL injection vulnerability
+            // In a real application, this would be server-side code
+            const sqlQuery = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
+            
+            // Check for SQL injection attempts
+            const commonSqlInjectionPatterns = [
+                "' OR '1'='1",
+                "' OR 1=1--",
+                "admin'--",
+                "' OR 'x'='x",
+                "'; DROP TABLE",
+                "' UNION SELECT",
+                "admin' OR '1'='1'--"
+            ];
+            
+            let isInjection = false;
+            for (let pattern of commonSqlInjectionPatterns) {
+                if (username.includes(pattern) || password.includes(pattern)) {
+                    isInjection = true;
+                    break;
+                }
+            }
+            
+            // Simulate different responses
+            if (isInjection) {
+                successDiv.innerHTML = `
+                    🎉 <strong>Login Successful!</strong><br>
+                    Welcome Administrator!<br>
+                    <strong>FLAG:</strong> HTC{sql_injection_master_2024}<br>
+                    <br>
+                    <strong>🎓 What you learned:</strong><br>
+                    • SQL injection bypasses authentication<br>
+                    • User input must be sanitized<br>
+                    • Use parameterized queries to prevent this<br>
+                    <br>
+                    <strong>Query executed:</strong><br>
+                    <code style="font-size:0.8em;">${sqlQuery}</code>
+                `;
+                successDiv.style.display = 'block';
+            } else if (username === 'admin' && password === 'password123') {
+                // Valid credentials (for demonstration)
+                successDiv.innerHTML = `
+                    🎉 <strong>Login Successful!</strong><br>
+                    Welcome Administrator!<br>
+                    <strong>FLAG:</strong> HTC{legitimate_login_2024}<br>
+                    <em>But finding SQL injection was the real challenge!</em>
+                `;
+                successDiv.style.display = 'block';
+            } else {
+                errorDiv.innerHTML = `
+                    ❌ <strong>Login Failed</strong><br>
+                    Invalid username or password.<br>
+                    <em>Hint: Maybe try some creative input combinations...</em>
+                `;
+                errorDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
