@@ -165,6 +165,20 @@ class HTCDatabase:
                     "Red LSB: Data extract untuk flag utama",
                     "Green MSB: Secondary message dengan teknik MSB"
                 ]
+            },
+            "HTC-WEB-002": {
+                "name": "Forum XSS Challenge", 
+                "points": 250, 
+                "category": "Web Security",
+                "difficulty": "Medium",
+                "flag": "HTC{xss_master_htc_2024}",
+                "description": "Eksploitasi kerentanan Cross-Site Scripting (XSS) pada sistem komentar forum HTC. Injeksi JavaScript untuk mendapatkan flag!",
+                "hints": [
+                    "Perhatikan bagaimana input diproses dalam sistem komentar",
+                    "Coba berbagai tag HTML dan JavaScript di field input",
+                    "XSS bisa terjadi di nama pengguna atau konten komentar",
+                    "Jika berhasil, alert atau pop-up akan muncul dengan flag"
+                ]
             }
         }
         
@@ -338,8 +352,8 @@ def show_home():
         <div class="challenge-card">
             <h3>🌐 Web Security</h3>
             <p>Pelajari SQL injection, XSS, dan kerentanan web lainnya melalui hands-on challenges.</p>
-            <p><strong>Available:</strong> 1 challenge</p>
-            <p><strong>Total Points:</strong> 150</p>
+            <p><strong>Available:</strong> 2 challenges</p>
+            <p><strong>Total Points:</strong> 400</p>
         </div>
         """, unsafe_allow_html=True)
     
@@ -443,6 +457,35 @@ def show_challenges():
     student = db.data["students"][st.session_state.current_nim]
     
     st.write(f"👋 Halo **{student['nama']}**! Total poin Anda: **{student['total_points']}**")
+    
+    # Live Challenge Links
+    st.markdown("---")
+    st.subheader("🌐 Live Interactive Challenges")
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("""
+        **🔗 HTC-WEB-001: SQL Injection Portal**
+        
+        Akses challenge secara langsung:
+        [🚀 **Buka Challenge**](https://yaanfzl.github.io/htc-cybersec-academy/challenges/htc-web-001/index_id.html)
+        
+        *Bypass login portal menggunakan SQL injection*
+        """)
+    
+    with col2:
+        st.markdown("""
+        **🔗 HTC-WEB-002: XSS Forum Challenge**
+        
+        Akses challenge secara langsung:
+        [🚀 **Buka Challenge**](https://yaanfzl.github.io/htc-cybersec-academy/challenges/htc-web-002/index_id.html)
+        
+        *Eksploitasi XSS pada sistem komentar forum*
+        """)
+    
+    st.info("💡 **Tip:** Buka challenge di tab baru, temukan flag, lalu submit di portal ini untuk mendapat poin!")
+    
+    st.markdown("---")
     
     # Filter challenges
     category_filter = st.selectbox("Filter berdasarkan kategori:", 
