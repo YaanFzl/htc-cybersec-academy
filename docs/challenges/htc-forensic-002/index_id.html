@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 HTC-FORENSIC-002: Foto Wisuda yang Mencurigakan</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6f42c1 0%, #28a745 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #6f42c1 0%, #28a745 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        .title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+        .difficulty {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .content {
+            padding: 2rem;
+        }
+        .scenario-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-left: 5px solid #ff9800;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        .scenario-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #e65100;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .challenge-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .image-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px dashed #6f42c1;
+            text-align: center;
+        }
+        .image-card img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .image-card img:hover {
+            transform: scale(1.05);
+        }
+        .advanced-section {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 5px solid #2196f3;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        .advanced-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #0d47a1;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .techniques-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .technique-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #2196f3;
+            position: relative;
+            overflow: hidden;
+        }
+        .technique-number {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #2196f3;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .technique-title {
+            font-weight: bold;
+            color: #0d47a1;
+            margin-bottom: 0.5rem;
+        }
+        .technique-description {
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        .technique-command {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 0.8rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+        .complexity-warning {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .hints-section {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffcc80 100%);
+            border-left: 5px solid #ff9800;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        .hint-item {
+            background: white;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #ff9800;
+            position: relative;
+        }
+        .hint-badge {
+            position: absolute;
+            top: -5px;
+            right: 10px;
+            background: #ff9800;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        .download-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .download-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 2px solid #dee2e6;
+            transition: all 0.3s ease;
+        }
+        .download-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-color: #6f42c1;
+        }
+        .download-btn {
+            background: linear-gradient(135deg, #6f42c1 0%, #28a745 100%);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(111, 66, 193, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+        .success-criteria {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        .flag-format {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            display: inline-block;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 2rem;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+        .progress-tracker {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid #6f42c1;
+        }
+        .progress-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+        .progress-checkbox {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #6f42c1;
+            position: relative;
+        }
+        .progress-checkbox.completed {
+            background: #28a745;
+            border-color: #28a745;
+        }
+        .progress-checkbox.completed::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-weight: bold;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🎓</div>
+            <div class="title">HTC-FORENSIC-002</div>
+            <div class="subtitle">Foto Wisuda yang Mencurigakan</div>
+            <div class="difficulty">MEDIUM • 300 POIN • MULTI-LAYER STEGO</div>
+        </div>
+
+        <div class="content">
+            <div class="scenario-box">
+                <div class="scenario-title">📖 Skenario Challenge</div>
+                <p>Setelah sukses dengan challenge forensik pertama, Anda dipromosikan menjadi <strong>Senior Digital Forensic Investigator</strong> di tim cybersecurity HTC! 🎉</p>
+                
+                <p>Kasus baru tiba: Seorang mahasiswa mengirim <strong>foto wisuda</strong> melalui email, namun sistem AI security kampus mendeteksi anomali pada file tersebut. Analisis awal menunjukkan:</p>
+                
+                <ul>
+                    <li>📁 <strong>Ukuran file:</strong> 2.1MB (sangat besar untuk foto biasa)</li>
+                    <li>🔍 <strong>Metadata:</strong> Mengandung string mencurigakan</li>
+                    <li>📊 <strong>Histogram:</strong> Distribusi pixel tidak normal</li>
+                    <li>🎯 <strong>Kecurigaan:</strong> Multi-layer steganography dengan teknik berbeda</li>
+                </ul>
+                
+                <p><strong>🎯 Misi Advanced:</strong> Temukan <u>semua 4 pesan tersembunyi</u> menggunakan teknik forensik yang berbeda!</p>
+            </div>
+
+            <div class="challenge-images">
+                <div class="image-card">
+                    <h3>📸 Foto Wisuda Normal</h3>
+                    <img src="htc-forensic-002-wisuda-small.jpg" alt="Foto wisuda small" onclick="enlargeImage(this)">
+                    <p><strong>htc-forensic-002-wisuda-small.jpg</strong></p>
+                    <p><small>Versi kecil untuk preview (500KB)</small></p>
+                </div>
+                
+                <div class="image-card">
+                    <h3>📸 Foto Wisuda Mencurigakan</h3>
+                    <img src="htc-forensic-002-wisuda.jpg" alt="Foto wisuda suspicious" onclick="enlargeImage(this)">
+                    <p><strong>htc-forensic-002-wisuda.jpg</strong></p>
+                    <p><small>Versi penuh untuk analisis (2.1MB)</small></p>
+                </div>
+            </div>
+
+            <div class="complexity-warning">
+                <h3>⚠️ Advanced Challenge Warning</h3>
+                <p><strong>Ini adalah challenge tingkat menengah dengan 4 teknik steganografi berbeda!</strong></p>
+                <p>Direkomendasikan selesaikan <strong>HTC-FORENSIC-001</strong> terlebih dahulu untuk memahami dasar-dasarnya.</p>
+                <p>Estimasi waktu: <strong>45-90 menit</strong> untuk investigator berpengalaman.</p>
+            </div>
+
+            <div class="advanced-section">
+                <div class="advanced-title">🔬 Teknik Investigasi Multi-Layer</div>
+                <p>Challenge ini menggunakan <strong>4 teknik steganografi berbeda</strong> yang harus ditemukan secara berurutan:</p>
+                
+                <div class="techniques-grid">
+                    <div class="technique-card">
+                        <div class="technique-number">1</div>
+                        <div class="technique-title">Visual Message (Blue LSB)</div>
+                        <div class="technique-description">
+                            Pesan visual tersembunyi di bit plane paling rendah channel biru. Terlihat sebagai pattern atau teks.
+                        </div>
+                        <div class="technique-command">Stegsolve → Blue plane 0</div>
+                    </div>
+                    
+                    <div class="technique-card">
+                        <div class="technique-number">2</div>
+                        <div class="technique-title">Geometric Pattern (Green Plane)</div>
+                        <div class="technique-description">
+                            Pattern geometris tersembunyi di green channel bit plane 2. Berupa bentuk atau simbol matematis.
+                        </div>
+                        <div class="technique-command">Stegsolve → Green plane 2</div>
+                    </div>
+                    
+                    <div class="technique-card">
+                        <div class="technique-number">3</div>
+                        <div class="technique-title">Main Flag (Red LSB Extract)</div>
+                        <div class="technique-description">
+                            Flag utama tersimpan dalam data extraction dari Red channel menggunakan LSB extraction technique.
+                        </div>
+                        <div class="technique-command">Analyse → Data Extract → Red LSB</div>
+                    </div>
+                    
+                    <div class="technique-card">
+                        <div class="technique-number">4</div>
+                        <div class="technique-title">Secondary Message (Green MSB)</div>
+                        <div class="technique-description">
+                            Pesan sekunder menggunakan MSB (Most Significant Bit) technique di Green channel untuk validasi.
+                        </div>
+                        <div class="technique-command">Analyse → Data Extract → Green MSB</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-tracker">
+                <h4>📋 Progress Tracker</h4>
+                <p>Gunakan checklist ini untuk melacak progress investigasi:</p>
+                <div class="progress-item">
+                    <div class="progress-checkbox" onclick="toggleProgress(this)"></div>
+                    <span>🔍 Initial file analysis (metadata, size, type)</span>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-checkbox" onclick="toggleProgress(this)"></div>
+                    <span>👁️ Visual message found (Blue plane 0)</span>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-checkbox" onclick="toggleProgress(this)"></div>
+                    <span>📐 Geometric pattern discovered (Green plane 2)</span>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-checkbox" onclick="toggleProgress(this)"></div>
+                    <span>🚩 Main flag extracted (Red LSB)</span>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-checkbox" onclick="toggleProgress(this)"></div>
+                    <span>💬 Secondary message found (Green MSB)</span>
+                </div>
+            </div>
+
+            <div class="hints-section">
+                <div class="advanced-title">💡 Progressive Hints System</div>
+                
+                <div class="hint-item">
+                    <div class="hint-badge">FREE</div>
+                    <strong>🎯 Hint Level 1:</strong> 
+                    Mulai dengan Blue plane 0 untuk melihat pesan visual pertama. Ini akan memberikan konfirmasi bahwa file memang mengandung data tersembunyi.
+                </div>
+                
+                <div class="hint-item">
+                    <div class="hint-badge">-10 PTS</div>
+                    <strong>🎯 Hint Level 2:</strong> 
+                    Setelah menemukan pesan visual, coba Green plane 2 untuk pattern geometris. Anda akan melihat bentuk atau simbol yang tidak natural.
+                </div>
+                
+                <div class="hint-item">
+                    <div class="hint-badge">-20 PTS</div>
+                    <strong>🎯 Hint Level 3:</strong> 
+                    Flag utama ada di Red channel LSB. Setting: <strong>Red channel, LSB first, extract by pixel order, save as text file</strong>.
+                </div>
+                
+                <div class="hint-item">
+                    <div class="hint-badge">-30 PTS</div>
+                    <strong>🎯 Hint Level 4:</strong> 
+                    Secondary message menggunakan Green MSB extraction. Flag format: <span class="flag-format">HTC{multi_layer_stego_master_2024}</span>
+                </div>
+                
+                <div class="hint-item">
+                    <div class="hint-badge">EXPERT</div>
+                    <strong>🎯 Hint Level 5:</strong> 
+                    Jika stuck, coba kombinasi Analyse → File Format untuk melihat embedded files atau gunakan strings command di terminal.
+                </div>
+            </div>
+
+            <div class="success-criteria">
+                <div class="advanced-title">🏆 Success Criteria & Scoring</div>
+                <p><strong>Untuk menyelesaikan challenge ini, Anda harus menemukan:</strong></p>
+                <ul>
+                    <li>✅ <strong>Visual Message:</strong> Konfirmasi teks di Blue plane 0</li>
+                    <li>✅ <strong>Geometric Pattern:</strong> Symbol/bentuk di Green plane 2</li>
+                    <li>✅ <strong>Main Flag:</strong> <span class="flag-format">HTC{multi_layer_stego_master_2024}</span></li>
+                    <li>✅ <strong>Secondary Validation:</strong> Pesan konfirmasi dari Green MSB</li>
+                </ul>
+                
+                <p><strong>🌟 Bonus Scoring System:</strong></p>
+                <ul>
+                    <li><strong>Perfect Score (300 pts):</strong> Semua 4 pesan ditemukan tanpa hint</li>
+                    <li><strong>Expert (270 pts):</strong> Menggunakan maksimal 2 hint</li>
+                    <li><strong>Advanced (240 pts):</strong> Menggunakan maksimal 4 hint</li>
+                    <li><strong>Intermediate (200 pts):</strong> Semua hint digunakan</li>
+                </ul>
+                
+                <p><strong>🎖️ Special Achievements:</strong></p>
+                <ul>
+                    <li>🚀 <strong>Speed Demon:</strong> +50 pts (selesai < 30 menit)</li>
+                    <li>📝 <strong>Documentation Master:</strong> +25 pts (laporan lengkap)</li>
+                    <li>🧠 <strong>Creative Solution:</strong> +25 pts (menggunakan tools tambahan)</li>
+                </ul>
+            </div>
+
+            <div class="download-section">
+                <div class="download-card">
+                    <h3>📥 Challenge Files</h3>
+                    <p>File utama untuk analisis forensik:</p>
+                    <a href="htc-forensic-002-wisuda.jpg" class="download-btn" download>
+                        📸 Download Full Image (2.1MB)
+                    </a>
+                    <p><small>File lengkap dengan semua layer tersembunyi</small></p>
+                </div>
+                
+                <div class="download-card">
+                    <h3>🔧 Analysis Tools</h3>
+                    <p>Tools yang direkomendasikan:</p>
+                    <a href="../htc-forensic-001/Stegsolve.jar" class="download-btn" download>
+                        ☕ Stegsolve.jar
+                    </a>
+                    <p><small>Tool utama untuk steganografi analysis</small></p>
+                </div>
+                
+                <div class="download-card">
+                    <h3>📚 Documentation</h3>
+                    <p>Panduan dan referensi lengkap:</p>
+                    <a href="README.md" class="download-btn" download>
+                        📖 Advanced Guide
+                    </a>
+                    <p><small>Methodology dan best practices</small></p>
+                </div>
+                
+                <div class="download-card">
+                    <h3>📋 Write-up Template</h3>
+                    <p>Template laporan forensik:</p>
+                    <a href="#" class="download-btn" onclick="downloadTemplate()">
+                        📝 Report Template
+                    </a>
+                    <p><small>Format profesional untuk dokumentasi</small></p>
+                </div>
+            </div>
+
+            <div class="advanced-section">
+                <div class="advanced-title">🎯 Format Flag & Submission</div>
+                <p><strong>Main Flag:</strong> <span class="flag-format">HTC{multi_layer_stego_master_2024}</span></p>
+                <p><strong>Cara Submit:</strong></p>
+                <ol>
+                    <li>Ekstrak flag utama dari Red channel LSB</li>
+                    <li>Verifikasi dengan menemukan semua 4 pesan tersembunyi</li>
+                    <li>Submit flag di portal utama HTC CyberSec Academy</li>
+                    <li>Upload write-up (opsional) untuk bonus points</li>
+                </ol>
+                
+                <p><strong>💡 Pro Tips:</strong></p>
+                <ul>
+                    <li>Screenshot setiap temuan untuk dokumentasi</li>
+                    <li>Catat settings/parameters yang digunakan</li>
+                    <li>Bandingkan dengan teknik di challenge HTC-FORENSIC-001</li>
+                    <li>Diskusikan dengan teman untuk collaborative learning</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            🎓 <strong>HTC CyberSec Academy - Challenge HTC-FORENSIC-002</strong><br>
+            🔍 <strong>Advanced Digital Forensics & Multi-layer Steganography</strong><br>
+            🇮🇩 <strong>Mari bersama membangun Indonesia yang lebih aman di era digital!</strong><br><br>
+            <small>Dibuat untuk tujuan edukasi cybersecurity advanced • HTC Instructor Team</small>
+        </div>
+    </div>
+
+    <script>
+        function enlargeImage(img) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.9);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+                cursor: pointer;
+            `;
+            
+            const enlargedImg = document.createElement('img');
+            enlargedImg.src = img.src;
+            enlargedImg.style.cssText = `
+                max-width: 95%;
+                max-height: 95%;
+                border-radius: 10px;
+                box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+            `;
+            
+            modal.appendChild(enlargedImg);
+            document.body.appendChild(modal);
+            
+            modal.addEventListener('click', function() {
+                document.body.removeChild(modal);
+            });
+        }
+        
+        function toggleProgress(checkbox) {
+            checkbox.classList.toggle('completed');
+            
+            // Check if all items are completed
+            const checkboxes = document.querySelectorAll('.progress-checkbox');
+            const completed = document.querySelectorAll('.progress-checkbox.completed');
+            
+            if (completed.length === checkboxes.length) {
+                setTimeout(() => {
+                    alert('🎉 Excellent progress tracking! Anda menunjukkan metodologi investigasi yang sistematis - skill penting untuk digital forensic investigator! 🔍');
+                }, 500);
+            }
+        }
+        
+        function downloadTemplate() {
+            const template = `
+# HTC-FORENSIC-002 Investigation Report
+
+## Executive Summary
+[Ringkasan temuan investigation]
+
+## Challenge Information
+- **Challenge ID:** HTC-FORENSIC-002
+- **File:** htc-forensic-002-wisuda.jpg
+- **Investigator:** [Nama Anda]
+- **Date:** ${new Date().toLocaleDateString('id-ID')}
+- **Time Taken:** [durasi]
+
+## Tools Used
+- [ ] Stegsolve v1.x
+- [ ] ExifTool
+- [ ] Strings command
+- [ ] Hexdump
+- [ ] Other: ________________
+
+## Investigation Process
+
+### 1. Initial Analysis
+**File Properties:**
+- Size: ____________
+- Format: ___________
+- Metadata findings: ____________
+
+### 2. Visual Message Discovery
+**Location:** Blue plane 0
+**Finding:** ________________
+**Screenshot:** [attach]
+
+### 3. Geometric Pattern Analysis
+**Location:** Green plane 2
+**Pattern description:** ____________
+**Screenshot:** [attach]
+
+### 4. Main Flag Extraction
+**Method:** Red channel LSB extraction
+**Settings used:** ________________
+**Flag found:** HTC{________________}
+
+### 5. Secondary Message Validation
+**Method:** Green MSB extraction
+**Validation message:** ____________
+
+## Technical Details
+**Steganography techniques identified:**
+1. LSB steganography in Blue channel
+2. Bit plane steganography in Green channel
+3. Data extraction from Red channel
+4. MSB technique in Green channel
+
+## Lessons Learned
+[Apa yang dipelajari dari challenge ini]
+
+## Recommendations
+[Saran untuk improvement keamanan]
+
+---
+Generated by HTC CyberSec Academy Report Generator
+            `;
+            
+            const blob = new Blob([template], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'HTC-FORENSIC-002-Report-Template.md';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        
+        // Easter egg for motivation
+        let logoClicks = 0;
+        document.querySelector('.logo').addEventListener('click', function() {
+            logoClicks++;
+            if (logoClicks === 7) {
+                alert('🎓 "The devil is in the details, but so is the solution. Setiap investigasi forensik mengajarkan kesabaran dan ketelitian." - Senior Digital Forensic Investigator');
+                logoClicks = 0;
+            }
+        });
+        
+        // Dynamic loading animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.technique-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, (index + 1) * 200);
+            });
+        });
+    </script>
+</body>
+</html>

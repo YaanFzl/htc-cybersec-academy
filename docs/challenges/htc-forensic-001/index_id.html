@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 HTC-FORENSIC-001: Rahasia di Balik Logo HTC</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        .title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+        .difficulty {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .content {
+            padding: 2rem;
+        }
+        .scenario-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-left: 5px solid #ff9800;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        .scenario-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #e65100;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .challenge-image {
+            text-align: center;
+            margin: 2rem 0;
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px dashed #28a745;
+        }
+        .challenge-image img {
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        .tools-section {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c8 100%);
+            border-left: 5px solid #28a745;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        .tools-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .step-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #28a745;
+        }
+        .step-number {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .step-title {
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 0.5rem;
+        }
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        .hints-section {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffcc80 100%);
+            border-left: 5px solid #ff9800;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        .hint-item {
+            background: white;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #ff9800;
+        }
+        .download-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .download-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 2px solid #dee2e6;
+            transition: all 0.3s ease;
+        }
+        .download-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-color: #28a745;
+        }
+        .download-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+        .warning-box {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            border: 2px solid #dc3545;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .learning-objectives {
+            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            border-left: 5px solid #17a2b8;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        .objective-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(23, 162, 184, 0.2);
+        }
+        .objective-item:last-child {
+            border-bottom: none;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 2rem;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+        .success-tip {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        .flag-format {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🔍</div>
+            <div class="title">HTC-FORENSIC-001</div>
+            <div class="subtitle">Rahasia di Balik Logo HTC</div>
+            <div class="difficulty">MUDAH • 200 POIN • STEGANOGRAFI</div>
+        </div>
+
+        <div class="content">
+            <div class="scenario-box">
+                <div class="scenario-title">📖 Skenario Challenge</div>
+                <p>Seorang mahasiswa HTC mengirim logo kampus melalui email kepada dosen, tapi ada yang aneh dengan file tersebut. Tim IT menemukan bahwa gambar ini memiliki <strong>ukuran file yang tidak wajar</strong> - terlalu besar untuk gambar logo sederhana.</p>
+                
+                <p>Investigasi awal menunjukkan kemungkinan penggunaan <strong>teknik steganografi</strong> untuk menyembunyikan pesan rahasia. Sebagai anggota tim cybersecurity HTC, Anda diminta untuk menganalisis gambar ini dan mengungkap pesan yang disembunyikan.</p>
+                
+                <p><strong>🎯 Misi:</strong> Temukan pesan tersembunyi dan dapatkan flag HTC!</p>
+            </div>
+
+            <div class="challenge-image">
+                <h3>🖼️ File yang Mencurigakan</h3>
+                <img src="htc-forensic-001-logo.png" alt="Logo HTC yang mencurigakan" onclick="enlargeImage(this)">
+                <p><strong>htc-forensic-001-logo.png</strong></p>
+                <p><small>Klik gambar untuk memperbesar • Ukuran file: ~150KB (terlalu besar untuk logo simple!)</small></p>
+            </div>
+
+            <div class="learning-objectives">
+                <div class="tools-title">🎓 Tujuan Pembelajaran</div>
+                <p>Setelah menyelesaikan challenge ini, Anda akan menguasai:</p>
+                <div class="objective-item">✅ Konsep dasar steganografi dan LSB (Least Significant Bit)</div>
+                <div class="objective-item">✅ Penggunaan Stegsolve untuk analisis visual</div>
+                <div class="objective-item">✅ Teknik bit plane analysis untuk forensik digital</div>
+                <div class="objective-item">✅ Data extraction dari channel warna RGB</div>
+                <div class="objective-item">✅ Metodologi investigasi digital forensics</div>
+            </div>
+
+            <div class="tools-section">
+                <div class="tools-title">🛠️ Tools yang Dibutuhkan</div>
+                
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Stegsolve (Wajib)</div>
+                        <p>Tool utama untuk analisis steganografi dan bit plane analysis.</p>
+                        <div class="code-block">wget http://www.caesum.com/handbook/Stegsolve.jar</div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Java Runtime</div>
+                        <p>Diperlukan untuk menjalankan Stegsolve.</p>
+                        <div class="code-block">sudo apt install default-jre</div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-title">File Tools (Opsional)</div>
+                        <p>Untuk analisis tambahan metadata dan hex.</p>
+                        <div class="code-block">exiftool, hexdump, strings</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tools-section">
+                <div class="tools-title">🚀 Step-by-Step Solution Guide</div>
+                
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Initial Analysis</div>
+                        <p>Periksa file properties dan metadata:</p>
+                        <div class="code-block">file htc-forensic-001-logo.png<br>ls -la htc-forensic-001-logo.png<br>exiftool htc-forensic-001-logo.png</div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Launch Stegsolve</div>
+                        <p>Jalankan Stegsolve dan buka file:</p>
+                        <div class="code-block">java -jar Stegsolve.jar<br># File → Open → pilih gambar</div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Bit Plane Analysis</div>
+                        <p>Coba filter bit plane secara sistematis:</p>
+                        <div class="code-block">• Red plane 0-7<br>• Green plane 0-7<br>• Blue plane 0-7<br><br>💡 Fokus pada Blue plane 0!</div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <div class="step-title">Data Extraction</div>
+                        <p>Extract data menggunakan Stegsolve:</p>
+                        <div class="code-block">Analyse → Data Extract<br>• Pilih Red channel<br>• LSB first<br>• Extract by pixel order</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hints-section">
+                <div class="tools-title">💡 Progressive Hints</div>
+                
+                <div class="hint-item">
+                    <strong>🎯 Hint Level 1 (Gratis):</strong> 
+                    Gambar normal biasanya tidak menyimpan informasi di bit terakhir setiap pixel. Coba lihat apa yang tersembunyi di LSB (Least Significant Bit)...
+                </div>
+                
+                <div class="hint-item">
+                    <strong>🎯 Hint Level 2 (-10 poin):</strong> 
+                    Ada dua pesan tersembunyi dalam gambar ini. Satu terlihat secara visual, satu lagi dalam bentuk data. Coba <strong>Blue plane 0</strong> dulu untuk melihat pesan visual!
+                </div>
+                
+                <div class="hint-item">
+                    <strong>🎯 Hint Level 3 (-20 poin):</strong> 
+                    Teks "HIDDEN FLAG!" akan muncul jelas di Blue plane 0. Untuk flag lengkap, gunakan <strong>Data Extract pada Red channel</strong>.
+                </div>
+                
+                <div class="hint-item">
+                    <strong>🎯 Hint Level 4 (-30 poin):</strong> 
+                    Setting extract: <strong>Red channel, LSB first, extract by pixel order</strong>. Flag dimulai dengan <span class="flag-format">HTC{</span>
+                </div>
+            </div>
+
+            <div class="success-tip">
+                <div class="tools-title">🏆 Success Criteria</div>
+                <p><strong>Target yang harus ditemukan:</strong></p>
+                <ul>
+                    <li>✅ <strong>Pesan visual:</strong> "HIDDEN FLAG!" (terlihat di Blue plane 0)</li>
+                    <li>✅ <strong>Flag lengkap:</strong> <span class="flag-format">HTC{stegsolve_master_forensics_2024}</span></li>
+                    <li>✅ <strong>Pemahaman teknik:</strong> LSB steganography di RGB channels</li>
+                </ul>
+                
+                <p><strong>🌟 Bonus Points:</strong></p>
+                <ul>
+                    <li>+25 poin: Selesai tanpa hint</li>
+                    <li>+15 poin: Dokumentasi proses lengkap</li>
+                    <li>+10 poin: Temukan kedua pesan dalam < 15 menit</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h3>⚠️ Penting untuk Diingat</h3>
+                <p><strong>Steganografi adalah seni menyembunyikan informasi!</strong></p>
+                <p>Teknik ini sering digunakan dalam:</p>
+                <ul style="text-align: left; display: inline-block;">
+                    <li>🕵️ Intelligence gathering dan komunikasi rahasia</li>
+                    <li>🦠 Malware yang menyembunyikan payload di gambar</li>
+                    <li>💰 Data exfiltration oleh insider threats</li>
+                    <li>📚 Digital watermarking untuk copyright protection</li>
+                </ul>
+            </div>
+
+            <div class="download-section">
+                <div class="download-card">
+                    <h3>📥 Challenge Files</h3>
+                    <p>Download file yang diperlukan untuk analisis:</p>
+                    <a href="htc-forensic-001-logo.png" class="download-btn" download>
+                        🖼️ Download Logo PNG
+                    </a>
+                    <p><small>File gambar dengan pesan tersembunyi</small></p>
+                </div>
+                
+                <div class="download-card">
+                    <h3>🔧 Stegsolve Tool</h3>
+                    <p>Tool utama untuk steganografi analysis:</p>
+                    <a href="Stegsolve.jar" class="download-btn" download>
+                        ☕ Download Stegsolve.jar
+                    </a>
+                    <p><small>Portable Java application</small></p>
+                </div>
+                
+                <div class="download-card">
+                    <h3>📚 Documentation</h3>
+                    <p>Panduan lengkap untuk challenge ini:</p>
+                    <a href="README.md" class="download-btn" download>
+                        📖 Download README
+                    </a>
+                    <p><small>Step-by-step guide dan learning materials</small></p>
+                </div>
+            </div>
+
+            <div class="tools-section">
+                <div class="tools-title">🎯 Format Flag & Submission</div>
+                <p><strong>Format Flag:</strong> <span class="flag-format">HTC{stegsolve_master_forensics_2024}</span></p>
+                <p><strong>Cara Submit:</strong></p>
+                <ol>
+                    <li>Temukan flag menggunakan teknik steganografi</li>
+                    <li>Copy flag dalam format yang benar</li>
+                    <li>Submit di portal utama HTC CyberSec Academy</li>
+                    <li>Dapatkan 200 poin + badge "Forensic Detective HTC"</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="footer">
+            🎓 <strong>HTC CyberSec Academy - Challenge HTC-FORENSIC-001</strong><br>
+            🔍 Pelajari digital forensics untuk menjadi investigator handal!<br>
+            🇮🇩 <strong>Mari bersama membangun Indonesia yang lebih aman di era digital!</strong><br><br>
+            <small>Dibuat untuk tujuan edukasi cybersecurity • HTC Instructor Team</small>
+        </div>
+    </div>
+
+    <script>
+        function enlargeImage(img) {
+            // Create modal to show enlarged image
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+                cursor: pointer;
+            `;
+            
+            const enlargedImg = document.createElement('img');
+            enlargedImg.src = img.src;
+            enlargedImg.style.cssText = `
+                max-width: 90%;
+                max-height: 90%;
+                border-radius: 10px;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            `;
+            
+            modal.appendChild(enlargedImg);
+            document.body.appendChild(modal);
+            
+            modal.addEventListener('click', function() {
+                document.body.removeChild(modal);
+            });
+        }
+        
+        // Easter egg - motivational message
+        let clickCount = 0;
+        document.querySelector('.logo').addEventListener('click', function() {
+            clickCount++;
+            if (clickCount === 5) {
+                alert('🎉 "Setiap pixel memiliki cerita. Tugas kita adalah mendengarkannya." - Digital Forensic Investigator 🔍');
+                clickCount = 0;
+            }
+        });
+        
+        // Add some dynamic effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const stepCards = document.querySelectorAll('.step-card');
+            stepCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'all 0.5s ease';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

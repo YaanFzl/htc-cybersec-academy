@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔐 HTC-CRYPTO-001: Pesan Rahasia Profesor</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        .title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+        .difficulty {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .content {
+            padding: 2rem;
+        }
+        .scenario-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-left: 5px solid #ff9800;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        .scenario-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #e65100;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .encrypted-message {
+            background: #f8f9fa;
+            border: 2px dashed #6f42c1;
+            padding: 1.5rem;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 1.5rem 0;
+            word-break: break-all;
+            line-height: 1.6;
+        }
+        .tools-section {
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c8 100%);
+            border-left: 5px solid #4caf50;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        .tools-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .decoder-interface {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .shift-control {
+            margin-bottom: 1.5rem;
+        }
+        .shift-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        .shift-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #6f42c1;
+            cursor: pointer;
+        }
+        .shift-display {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #6f42c1;
+            margin: 1rem 0;
+        }
+        .decoded-result {
+            background: #f8f9fa;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            min-height: 100px;
+            word-break: break-all;
+            line-height: 1.6;
+        }
+        .brute-force-btn {
+            background: linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        .brute-force-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(111, 66, 193, 0.3);
+        }
+        .brute-force-results {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+        }
+        .brute-result-item {
+            padding: 0.5rem;
+            border-bottom: 1px solid #eee;
+            font-family: 'Courier New', monospace;
+        }
+        .brute-result-item:hover {
+            background: #e9ecef;
+            cursor: pointer;
+        }
+        .flag-found {
+            background: #d4edda !important;
+            border: 2px solid #28a745 !important;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+        }
+        .hints-section {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffcc80 100%);
+            border-left: 5px solid #ff9800;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        .hint-item {
+            background: white;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #ff9800;
+        }
+        .download-section {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .download-btn {
+            background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: bold;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(23, 162, 184, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 2rem;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+        .success-message {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🔐</div>
+            <div class="title">HTC-CRYPTO-001</div>
+            <div class="subtitle">Pesan Rahasia Profesor</div>
+            <div class="difficulty">MUDAH • 125 POIN</div>
+        </div>
+
+        <div class="content">
+            <div class="scenario-box">
+                <div class="scenario-title">📖 Skenario Challenge</div>
+                <p><strong>Profesor Bimus</strong> dari jurusan Computer Science HTC meninggalkan pesan misterius di papan tulis sebelum pergi cuti panjang. Mahasiswa menemukan catatan terenkripsi ini di kantornya.</p>
+                <p>Sebagai mahasiswa cybersecurity HTC, tugas Anda adalah men-decode pesan rahasia ini menggunakan pengetahuan kriptografi klasik!</p>
+            </div>
+
+            <div class="encrypted-message">
+                <strong>📜 Pesan Terenkripsi:</strong><br><br>
+                "Udkqhp xqwxn phqjlnxwl xmldq anklud dgdodk: KWF{fdhvdu_flskhu_pdvwhu_lqgrqhvld}"
+            </div>
+
+            <div class="tools-section">
+                <div class="tools-title">🛠️ Interactive Caesar Decoder</div>
+                <p>Gunakan decoder interaktif di bawah ini untuk memecahkan cipher. Geser slider untuk mencoba shift yang berbeda!</p>
+                
+                <div class="decoder-interface">
+                    <div class="shift-control">
+                        <label for="shiftRange"><strong>Shift Value (1-25):</strong></label>
+                        <div class="shift-display">Shift: <span id="shiftValue">1</span></div>
+                        <input type="range" id="shiftRange" class="shift-slider" min="1" max="25" value="1">
+                    </div>
+                    
+                    <div class="decoded-result" id="decodedText">
+                        Geser slider di atas untuk melihat hasil dekripsi...
+                    </div>
+                    
+                    <button class="brute-force-btn" onclick="bruteForce()">
+                        🚀 Brute Force (Coba Semua Shift)
+                    </button>
+                    
+                    <div class="brute-force-results" id="bruteResults"></div>
+                </div>
+            </div>
+
+            <div class="hints-section">
+                <div class="tools-title">💡 Hints & Tips</div>
+                <div class="hint-item">
+                    <strong>🎯 Hint 1:</strong> Caesar cipher menggeser setiap huruf dengan jumlah tetap. Coba shift 3 (metode Caesar asli) terlebih dahulu.
+                </div>
+                <div class="hint-item">
+                    <strong>🎯 Hint 2:</strong> Perhatikan pola kata dalam bahasa Indonesia. Hasil yang benar akan membentuk kalimat yang masuk akal.
+                </div>
+                <div class="hint-item">
+                    <strong>🎯 Hint 3:</strong> Jika manual tidak berhasil, gunakan tombol "Brute Force" untuk melihat semua kemungkinan!
+                </div>
+                <div class="hint-item">
+                    <strong>🚩 Format Flag:</strong> <code>HTC{...}</code> - Flag akan muncul dalam hasil dekripsi yang benar.
+                </div>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                <h3>🎉 Selamat! Flag Ditemukan!</h3>
+                <p>Anda berhasil memecahkan Caesar cipher! Copy flag dan submit di portal utama untuk mendapat 125 poin.</p>
+                <p><strong>🎓 Yang Anda Pelajari:</strong></p>
+                <ul style="text-align: left; display: inline-block;">
+                    <li>Prinsip substitution cipher klasik</li>
+                    <li>Teknik brute force untuk cipher sederhana</li>
+                    <li>Pattern recognition dalam bahasa Indonesia</li>
+                    <li>Penggunaan tools kriptografi dasar</li>
+                </ul>
+            </div>
+
+            <div class="download-section">
+                <h3>📥 Download Challenge Files</h3>
+                <a href="pesan.txt" class="download-btn" download>
+                    📄 Download pesan.txt
+                </a>
+                <p><small>File asli challenge untuk analisis offline atau menggunakan tools eksternal.</small></p>
+            </div>
+        </div>
+
+        <div class="footer">
+            🎓 <strong>HTC CyberSec Academy - Challenge HTC-CRYPTO-001</strong><br>
+            🔐 Pelajari kriptografi klasik untuk memahami fondasi keamanan modern!<br>
+            🇮🇩 <strong>Mari bersama membangun Indonesia yang lebih aman di era digital!</strong><br><br>
+            <small>Dibuat untuk tujuan edukasi cybersecurity • HTC Instructor Team</small>
+        </div>
+    </div>
+
+    <script>
+        const encryptedText = "Udkqhp xqwxn phqjlnxwl xmldq anklud dgdodk: KWF{fdhvdu_flskhu_pdvwhu_lqgrqhvld}";
+        const correctFlag = "HTC{caesar_cipher_master_indonesia}";
+        
+        function caesarDecode(text, shift) {
+            let result = "";
+            for (let char of text) {
+                if (char.match(/[a-zA-Z]/)) {
+                    const isUpper = char === char.toUpperCase();
+                    const charCode = char.toUpperCase().charCodeAt(0);
+                    let shifted = charCode - shift;
+                    
+                    if (shifted < 65) {
+                        shifted += 26;
+                    }
+                    
+                    const resultChar = String.fromCharCode(shifted);
+                    result += isUpper ? resultChar : resultChar.toLowerCase();
+                } else {
+                    result += char;
+                }
+            }
+            return result;
+        }
+        
+        const shiftRange = document.getElementById('shiftRange');
+        const shiftValue = document.getElementById('shiftValue');
+        const decodedText = document.getElementById('decodedText');
+        const successMessage = document.getElementById('successMessage');
+        
+        shiftRange.addEventListener('input', function() {
+            const shift = parseInt(this.value);
+            shiftValue.textContent = shift;
+            
+            const decoded = caesarDecode(encryptedText, shift);
+            decodedText.textContent = decoded;
+            
+            // Check if flag is found
+            if (decoded.includes(correctFlag)) {
+                decodedText.classList.add('flag-found');
+                successMessage.style.display = 'block';
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                decodedText.classList.remove('flag-found');
+                successMessage.style.display = 'none';
+            }
+        });
+        
+        function bruteForce() {
+            const resultsDiv = document.getElementById('bruteResults');
+            resultsDiv.innerHTML = '';
+            resultsDiv.style.display = 'block';
+            
+            for (let shift = 1; shift <= 25; shift++) {
+                const decoded = caesarDecode(encryptedText, shift);
+                const resultItem = document.createElement('div');
+                resultItem.className = 'brute-result-item';
+                resultItem.innerHTML = `<strong>Shift ${shift}:</strong> ${decoded}`;
+                
+                if (decoded.includes(correctFlag)) {
+                    resultItem.classList.add('flag-found');
+                    resultItem.innerHTML += '<br><strong>🎉 FLAG FOUND!</strong>';
+                }
+                
+                resultItem.addEventListener('click', function() {
+                    shiftRange.value = shift;
+                    shiftValue.textContent = shift;
+                    decodedText.textContent = decoded;
+                    
+                    if (decoded.includes(correctFlag)) {
+                        decodedText.classList.add('flag-found');
+                        successMessage.style.display = 'block';
+                        successMessage.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+                
+                resultsDiv.appendChild(resultItem);
+            }
+        }
+        
+        // Easter egg - fun fact about Caesar cipher
+        let clickCount = 0;
+        document.querySelector('.logo').addEventListener('click', function() {
+            clickCount++;
+            if (clickCount === 3) {
+                alert('🎉 Fun Fact: Julius Caesar menggunakan shift 3 dalam pesan militerbahaya karena kebanyakan musuhnya buta huruf! 🏛️');
+                clickCount = 0;
+            }
+        });
+    </script>
+</body>
+</html>

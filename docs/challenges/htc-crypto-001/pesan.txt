@@ -1,0 +1,42 @@
+===============================================
+🔐 HTC-CRYPTO-001: Pesan Rahasia Profesor
+===============================================
+
+Skenario:
+Profesor Bimus dari jurusan Compsci HTC meninggalkan 
+pesan misterius di papan tulis sebelum pergi cuti panjang. 
+Mahasiswa menemukan catatan ini di kantornya.
+
+Pesan Terenkripsi:
+"Udkqhp xqwxn phqjlnxwl xmldq anklud dgdodk: KWF{fdhvdu_flskhu_pdvwhu_lqgrqhvld}"
+
+Petunjuk:
+- Ini adalah Caesar cipher klasik
+- Coba geser huruf dengan nilai berbeda (1-25)
+- Mulai dengan shift yang paling umum digunakan
+- Perhatikan pola kata dalam bahasa Indonesia
+
+Tujuan:
+Temukan pesan asli dan dapatkan flag HTC!
+
+Format Flag: HTC{...}
+
+===============================================
+💡 Hint Tambahan:
+- Caesar cipher menggeser setiap huruf dengan jumlah tetap
+- ROT13 adalah Caesar cipher dengan shift 13
+- Coba shift 3 (metode Caesar asli) terlebih dahulu
+- Jika tidak berhasil, coba shift lainnya secara sistematis
+
+🛠️ Tools yang bisa digunakan:
+1. Manual: Tulis alfabet dan geser huruf satu per satu
+2. Online: Gunakan decoder Caesar cipher online
+3. Terminal Linux: tr 'A-Za-z' '[shift_pattern]'
+4. Python script sederhana
+
+🎯 Learning Objectives:
+- Memahami prinsip substitution cipher
+- Belajar teknik brute force pada cipher sederhana  
+- Mengenali pola bahasa untuk validasi dekripsi
+- Menggunakan tools kriptografi dasar
+===============================================
